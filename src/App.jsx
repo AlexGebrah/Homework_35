@@ -17,8 +17,9 @@ const [user, setUser] = useState({
   return (
     <div className={'app'}>
         <TwitterContext.Provider value={{
-            user /*user: user*/,
-            stats /*stats: stats*/
+            user,
+            setUser,
+            stats
         }}>
             <Navigation/>
             <Body/>
