@@ -3,11 +3,21 @@ import {useContext} from "react";
 import {TwitterContext} from "../Utils/context.js";
 
 const Stats = () => {
-    const {user, stats} = useContext(TwitterContext);
+    const {user, setUser, stats} = useContext(TwitterContext);
+
+    const handeleChangeName = () => {
+        const newName = prompt("Введите новое имя:", user.name);
+        if (newName) {
+            setUser((oldInfo) => ({
+                ...oldInfo,
+                name: newName,
+            }));
+        }
+    }
 
     return (
         <div className={'user-stats'}>
-            <div>
+            <div onClick={handeleChangeName}>
                 <Avatar/>
                 {user.name}
             </div>
