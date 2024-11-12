@@ -5,7 +5,7 @@ import {TwitterContext} from "../Utils/context.js";
 const Stats = () => {
     const {user, setUser, stats} = useContext(TwitterContext);
 
-    const handeleChangeName = () => {
+    const handelChangeName = () => {
         const newName = prompt("Введите новое имя:", user.name);
         if (newName) {
             setUser((oldInfo) => ({
@@ -17,7 +17,7 @@ const Stats = () => {
 
     return (
         <div className={'user-stats'}>
-            <div onClick={handeleChangeName}>
+            <div onClick={handelChangeName}>
                 <Avatar/>
                 {user.name}
             </div>
