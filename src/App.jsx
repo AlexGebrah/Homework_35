@@ -19,7 +19,8 @@ const [user, setUser] = useState({
         <TwitterContext.Provider value={{
             user,
             setUser,
-            stats
+            stats,
+            setStats
         }}>
             <Navigation/>
             <Body/>

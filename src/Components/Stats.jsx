@@ -3,34 +3,58 @@ import {useContext} from "react";
 import {TwitterContext} from "../Utils/context.js";
 
 const Stats = () => {
-    const {user, setUser, stats} = useContext(TwitterContext);
+    const {user, stats, setStats} = useContext(TwitterContext);
 
-    const handelChangeName = () => {
-        const newName = prompt("Введите новое имя:", user.name);
-        if (newName) {
-            setUser((oldInfo) => ({
+    const handleFollowersClick = (event) => {
+        if (event.button === 0) {
+            setStats((oldInfo) => ({
                 ...oldInfo,
-                name: newName,
+                followers: stats.followers + 1,
             }));
+        }
+
+        if (event.button === 2) {
+            setStats((oldInfo) => ({
+                ...oldInfo,
+                followers: stats.followers > 0 ? stats.followers - 1 : 0,
+            }));
+            event.preventDefault();
+        }
+    }
+
+    const handleFollowingClick = (event) => {
+        if (event.button === 0) {
+            setStats((oldInfo) => ({
+                ...oldInfo,
+                following: stats.following + 1
+            }));
+        }
+
+        if (event.button === 2) {
+            setStats((oldInfo) => ({
+                ...oldInfo,
+                following: stats.following > 0 ? stats.following - 1 : 0,
+            }));
+            event.preventDefault();
         }
     }
 
     return (
         <div className={'user-stats'}>
-            <div onClick={handelChangeName}>
+            <div>
                 <Avatar/>
                 {user.name}
             </div>
             <div className={'stats'}>
-                <div>
+                <div onClick={handleFollowersClick} onContextMenu={handleFollowersClick}>
                     Followers: {stats.followers}
                 </div>
-                <div>
+                <div onClick={handleFollowingClick} onContextMenu={handleFollowingClick}>
                     Following: {stats.following}
                 </div>
             </div>
         </div>
     );
-};
+}
 
 export default Stats;
